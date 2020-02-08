@@ -1,0 +1,14 @@
+{
+  "name": "cesumar-discord-bot",
+  "version": "0.1.0",
+  "description": "A JavaScript Bot to Unicesumar Discord Channel",
+  "main": "index.js",
+  "repository": "https://github.com/lucasfelipecdm/cesumar-discord-bot.git",
+  "author": "Lucas Felipe Costa da Mata",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "eslint": "^6.8.0"
+  }
+}
