@@ -4,14 +4,14 @@ module.exports = () => {
     const { token, prefix } = require('../config/config.json');
 
     const client = new Discord.Client();
-    const commands = Commands.loadCommands();
+    client.commands = Commands.loadCommands();
 
     client.once('ready', () => console.log('-- READY AND PLAYING :P --'));
 
     client.on('message', (message) => {
         if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-        Commands.processCommand(commands, message);
+        Commands.processCommand(client.commands, message);
     });
 
     client.login(token);
