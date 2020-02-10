@@ -6,7 +6,11 @@ module.exports = () => {
     const client = new Discord.Client();
     client.commands = Commands.loadCommands();
 
-    client.once('ready', () => console.log('-- READY AND PLAYING :P --'));
+    client.once('ready', () => {
+        client.user.setActivity('my development!', { type: 'WATCHING' });
+
+        console.log('-- READY AND PLAYING :P --')
+    });
 
     client.on('message', (message) => {
         if (!message.content.startsWith(prefix) || message.author.bot) return;

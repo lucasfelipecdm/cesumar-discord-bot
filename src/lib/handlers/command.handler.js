@@ -1,4 +1,5 @@
 const { prefix } = require('../../config/config.json');
+const Antispam = require('./antispam.handler');
 const Discord = require('discord.js');
 const fs = require('fs');
 
@@ -25,6 +26,7 @@ module.exports = {
             message.channel.send('404 - Command not found!');
             return;
         }
+
         if (command.args && !args.length) {
             let reply = `You didn't provide any arguments, ${message.author}!`;
 
@@ -34,6 +36,9 @@ module.exports = {
 
             return message.channel.send(reply);
         }
+
+        Antispam.verifySpam(command, message);
+
         try {
             command.execute(message, args);
         } catch (error) {

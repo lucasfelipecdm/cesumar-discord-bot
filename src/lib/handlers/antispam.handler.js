@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports = {
-    verifySpam: (command) => {
+    verifySpam: (command, message) => {
         const cooldowns = new Discord.Collection();
 
         if (!cooldowns.has(command.name)) {
