@@ -15,14 +15,33 @@ module.exports = {
 
         return commands;
     },
-    processCommand: (message) => {
-        console.log(message.content);
+    processCommand: (commands, message) => {
+        console.log('-- COMMAND RECEIVED --');
+        const { prefix } = require('../../config/config.json');
+
         const args = message.content.slice(prefix.length).split(/ +/);
-        const command = args.shift().toLowerCase();
-        switch (command) {
-            case 'teste':
-                client.commands.get('teste').execute(message, args);
-                break;
+        const commandName = args.shift().toLowerCase();
+
+        if (!commands.has(commandName)) {
+            message.channel.send('404 - Command not found!');
+            return;
+        }
+
+        const command = commands.get(commandName);
+        if (command.args && !args.length) {
+            let reply = `You didn't provide any arguments, ${message.author}!`;
+
+            if (command.usage) {
+                reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+            }
+
+            return message.channel.send(reply);
+        }
+        try {
+            command.execute(message, args);
+        } catch (error) {
+            console.error(error);
+            message.reply('there was an error trying to execute that command!');
         }
     }
 }
