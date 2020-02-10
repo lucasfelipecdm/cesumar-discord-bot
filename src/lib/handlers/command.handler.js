@@ -1,5 +1,5 @@
 module.exports = {
-    loadCommands: function () {
+    loadCommands: () => {
         console.log('-- LOADING COMMANDS FILES --');
 
         const Discord = require('discord.js');
@@ -21,13 +21,12 @@ module.exports = {
 
         const args = message.content.slice(prefix.length).split(/ +/);
         const commandName = args.shift().toLowerCase();
+        const command = commands.get(commandName) || commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));;
 
-        if (!commands.has(commandName)) {
+        if (!command) {
             message.channel.send('404 - Command not found!');
             return;
         }
-
-        const command = commands.get(commandName);
         if (command.args && !args.length) {
             let reply = `You didn't provide any arguments, ${message.author}!`;
 
