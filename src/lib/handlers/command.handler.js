@@ -5,7 +5,6 @@ const fs = require('fs');
 
 module.exports = {
     loadCommands: () => {
-        console.log('-- LOADING COMMANDS FILES --');
         const commands = new Discord.Collection();
         const commandFiles = fs.readdirSync('src/lib/commands').filter(file => file.endsWith('.js'));
 
@@ -16,10 +15,10 @@ module.exports = {
 
         return commands;
     },
-    processCommand: (commands, message) => {
-        console.log('-- COMMAND RECEIVED --');
+    processCommand: (message) => {
         const args = message.content.slice(prefix.length).split(/ +/);
         const commandName = args.shift().toLowerCase();
+        const commands = message.client.commands;
         const command = commands.get(commandName) || commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));;
 
         if (!command) {

@@ -1,3 +1,3 @@
-const app = require('./lib/app');
+const App = require('./lib/app');
 
-app();
+App.execute();
