@@ -6,7 +6,13 @@ module.exports = {
     aliases: ['questão'],
     description: 'Set the next question.',
     execute: (message, args) => {
-        message.client.question.question = message.content;
-        message.channel.send('Question added!');
+        const auxVar = args.trim().split(/ +/);
+        const title = `${auxVar[0]} ${auxVar[1].split('\n')[0]}`;
+        const content = args.trim().slice(title.length);
+
+        message.client.question.question.title = title;
+        message.client.question.question.content = content;
+
+        message.channel.send(`Question set successfully`);
     }
 };

@@ -6,11 +6,9 @@ module.exports = {
     aliases: ['alternativas'],
     description: 'Set the next alternatives.',
     execute: (message, args) => {
-        message.client.question.alternatives[0] = message.content;
-        message.client.question.alternatives[1] = message.content;
-        message.client.question.alternatives[2] = message.content;
-        message.client.question.alternatives[3] = message.content;
-        message.client.question.alternatives[4] = message.content;
+        for (let i; i < 5; i++) {
+            message.client.question.alternatives[i] = message.content;
+        }
 
         message.channel.send('Alternatives added!');
 
@@ -19,6 +17,7 @@ module.exports = {
             message.channel.send('there was an error trying to prune messages in this channel!');
         });
 
+        message.channel.send(args);
         message.client.question.createEmbed(message);
     }
 };

@@ -16,8 +16,8 @@ module.exports = {
         return commands;
     },
     processCommand: (message) => {
-        const args = message.content.slice(prefix.length).split(/ +/);
-        const commandName = args.shift().toLowerCase();
+        const commandName = message.content.slice(prefix.length).split(/ +/).shift().toLowerCase();
+        const args = message.content.slice((prefix.length + commandName.length));
         const commands = message.client.commands;
         const command = commands.get(commandName) || commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));;
 
