@@ -15,7 +15,7 @@ module.exports = {
         const title = auxVar[0];
         let content;
 
-        if (args.trim().search('Alternativas'))
+        if (args.trim().search('Alternativas')) 
             content = args.trim().slice(title.length, args.trim().search('Alternativas'));
         else
             content = args.trim().slice(title.length);

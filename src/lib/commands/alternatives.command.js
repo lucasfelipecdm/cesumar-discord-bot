@@ -10,7 +10,7 @@ module.exports = {
             message.channel.send("Sorry, you don't have permission to use this command. :(");
             return;
         }
-
+        message.client.question.alternatives = [];
         const auxVar = args.split('\n');
         auxVar.forEach((aux, index) => {
             switch (aux) {
