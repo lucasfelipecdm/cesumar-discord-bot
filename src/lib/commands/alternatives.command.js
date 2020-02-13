@@ -10,8 +10,14 @@ module.exports = {
             message.channel.send("Sorry, you don't have permission to use this command. :(");
             return;
         }
-        message.client.question.alternatives = [];
         const auxVar = args.split('\n');
+        let auxIndex = 0;
+
+        message.client.question.alternatives.forEach((alt) => {
+            alt.content;
+            alt.votes = 0;
+        });
+
         auxVar.forEach((aux, index) => {
             switch (aux) {
                 case 'Alternativa 1:':
@@ -19,7 +25,8 @@ module.exports = {
                 case 'Alternativa 3:':
                 case 'Alternativa 4:':
                 case 'Alternativa 5:':
-                    message.client.question.alternatives.push(auxVar[index + 1]);
+                    message.client.question.alternatives[auxIndex].content = auxVar[index + 1];
+                    auxIndex++;
                     break;
             }
         });

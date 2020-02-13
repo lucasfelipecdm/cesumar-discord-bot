@@ -11,7 +11,7 @@ module.exports = {
             return;
         }
 
-        message.client.question.url = args;
+        message.client.question.question.url = args;
         message.channel.send('URL set successfully!');
     }
 };
